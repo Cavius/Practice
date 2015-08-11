@@ -1,6 +1,7 @@
 //testingStart.cpp
 #include "testingStart.h"
-
+#include "CGameManager.h"
+#include "Constants.h"
 USING_NS_CC;
 
 Scene* testingStart::createScene()
@@ -27,12 +28,17 @@ bool testingStart::init()
 	{
 		return false;
 	}
+	char FileName[32];
+	CGameManager::Instance()->SetUpScaleFactors();
+	Size visibleSize = Director::getInstance()->getVisibleSize();
 
-	auto sprite = Sprite::create("HelloWorld.png");
-	// if no defined, the picture will be in origin for his center
-
-	// add the sprite as a child to this layer
-	this->addChild(sprite, 0);
+	GETFILENAME(FileName, 32, "Start", ".png");
+	auto bgSprite = Sprite::create(FileName);
+	SCALENODE_XY(bgSprite);
+	bgSprite->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+	bgSprite->setAnchorPoint(Vec2(0.5, 0.5));
+	this->addChild(bgSprite, kZindexBG);
+	CCLOG("filename: %s", FileName);
 
 	return true;
 }

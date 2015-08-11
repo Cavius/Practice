@@ -34,7 +34,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-        glview = GLViewImpl::create("Practice");
+		glview = GLViewImpl::createWithRect("Practice", Rect(0, 0, 1920, 1280));// *Change the resolution size of the application,(0,0,..?
+		//glview = GLViewImpl::create("Practice"); Original code
         director->setOpenGLView(glview);
     }
 
